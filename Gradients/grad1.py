@@ -100,7 +100,7 @@ def Jv(theta, v_theta):
         outs.append(jvp_val)
     return torch.cat(outs)   # (n*k,)
 
-m = 5   # number of random probes (try 20, 50, 100)
+m = 10   # number of random probes (try 20, 50, 100)
 
 K_approx = torch.zeros(n * k, n * k, dtype=torch.double)
 
@@ -130,8 +130,8 @@ eigvals = eigvals[eigvals > 1e-12]
 
 eigvals_approx = eigvals_approx[eigvals_approx > 1e-12]
 
-plt.plot(eigvals,label="Hard derivative")
-plt.plot(eigvals_approx,label="Hutchinson")
+plt.plot(eigvals.detach().numpy() ,label="Hard derivative")
+plt.plot(eigvals_approx.detach().numpy() ,label="Hutchinson")
 plt.legend()
 plt.show()
 
